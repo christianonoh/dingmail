@@ -8,7 +8,18 @@ const App = () => {
   // Function to fetch the email from the actual API
   const fetchEmailFromAPI = async (id) => {
     try {
-      const response = await fetch(`https://search.rutgers.edu/api/people/details?id=${id}`);
+      const response = await fetch(`https://search.rutgers.edu/api/people/details?id=${id}`, {
+      method: 'GET',
+      headers: {
+        'accept': '*/*',
+        'accept-language': 'en-US,en;q=0.9',
+        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin',
+        'connection': 'keep-alive',
+      },
+    });
       const data = await response.json();
       // Assuming the email is in the response as 'emailAddress'
       return data.emailAddress || 'No email found';
